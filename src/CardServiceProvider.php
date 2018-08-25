@@ -53,6 +53,6 @@ class CardServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->mergeConfigFrom(__DIR__ . '/../config/at-a-glance.php', 'at-a-glance');
     }
 }
