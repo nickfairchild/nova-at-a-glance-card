@@ -14,6 +14,21 @@ class AtAGlance extends Card
     public $width = '1/3';
 
     /**
+     * Exclude Resources from the card
+     *
+     * @param array $resources
+     * @return void
+     */
+    public function excludeResources(array $resources)
+    {
+        $this->withMeta([
+            'excludes' => $resources
+        ]);
+
+        return $this;
+    }
+
+    /**
      * Get the component name for the element.
      *
      * @return string
