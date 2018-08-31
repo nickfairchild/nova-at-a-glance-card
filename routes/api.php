@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Nickfairchild\AtAGlance\Http\Controllers\ResourcesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,8 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/resources', function (Request $request) {
-    return collect(config('at-a-glance.resources'))->map(function ($item, $key) {
-        return $item::all()->count();
-    });
-});
+Route::get('/resources', ResourcesController::class);
