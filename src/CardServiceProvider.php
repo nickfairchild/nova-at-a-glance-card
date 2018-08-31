@@ -20,10 +20,6 @@ class CardServiceProvider extends ServiceProvider
             $this->routes();
         });
 
-        $this->publishes([
-            __DIR__ . '/../config/at-a-glance.php' => config_path('at-a-glance.php')
-        ], 'config');
-
         Nova::serving(function (ServingNova $event) {
             Nova::script('at-a-glance', __DIR__ . '/../dist/js/card.js');
             Nova::style('at-a-glance', __DIR__ . '/../dist/css/card.css');
@@ -53,6 +49,6 @@ class CardServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/at-a-glance.php', 'at-a-glance');
+        //
     }
 }
