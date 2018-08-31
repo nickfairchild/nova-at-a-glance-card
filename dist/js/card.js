@@ -259,7 +259,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['card'],
@@ -270,13 +269,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
     mounted: function mounted() {
-        var _this = this;
-
-        Nova.request().get('/nova-vendor/at-a-glance/resources').then(function (response) {
-            return _this.resources = response.data;
-        });
+        this.load();
     },
 
+
+    methods: {
+        load: function load() {
+            var _this = this;
+
+            Nova.request().get('/nova-vendor/at-a-glance/resources', {
+                params: {
+                    excludes: this.card.excludes
+                }
+            }).then(function (response) {
+                return _this.resources = response.data;
+            });
+        }
+    },
 
     filters: {
         title: function title(value, count) {
@@ -309,7 +318,7 @@ var render = function() {
     _c(
       "div",
       { staticClass: "flex flex-wrap px-3 pb-3 w-full" },
-      _vm._l(_vm.resources, function(resource, key) {
+      _vm._l(_vm.resources, function(resource) {
         return _c(
           "div",
           { key: resource, staticClass: "w-1/2 pb-2" },
@@ -317,16 +326,15 @@ var render = function() {
             _c(
               "router-link",
               {
-                key: key,
                 staticClass: "no-underline font-bold dim text-primary",
-                attrs: { to: "/resources/" + key }
+                attrs: { to: "/resources/" + resource.uri }
               },
               [
                 _vm._v(
                   "\n                " +
-                    _vm._s(resource) +
+                    _vm._s(resource.count) +
                     " " +
-                    _vm._s(_vm._f("title")(key, resource)) +
+                    _vm._s(resource.label) +
                     "\n            "
                 )
               ]

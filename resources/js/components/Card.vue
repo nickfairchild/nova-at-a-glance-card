@@ -4,13 +4,12 @@
             <h1 class="text-2xl text-80 font-light">At A Glance</h1>
         </div>
         <div class="flex flex-wrap px-3 pb-3 w-full">
-            <div class="w-1/2 pb-2" v-for="(resource, key) in resources" :key="resource">
+            <div class="w-1/2 pb-2" v-for="resource in resources" :key="resource">
                 <router-link
-                    :to="`/resources/${key}`"
-                    :key="key"
+                    :to="`/resources/${resource.uri}`"
                     class="no-underline font-bold dim text-primary"
                 >
-                    {{ resource }} {{ key | title(resource) }}
+                    {{ resource.count }} {{ resource.label }}
                 </router-link>
             </div>
         </div>
@@ -28,8 +27,18 @@ export default {
     },
 
     mounted() {
-        Nova.request().get('/nova-vendor/at-a-glance/resources')
-            .then(response => this.resources = response.data)
+        this.load()
+    },
+
+    methods: {
+        load() {
+            Nova.request().get('/nova-vendor/at-a-glance/resources', {
+                params: {
+                    excludes:   this.card.excludes
+                }
+            })
+                .then(response => this.resources = response.data)
+        }
     },
 
     filters: {
