@@ -6,6 +6,8 @@
 
 ![alt text](https://i.imgur.com/NwL30YX.png "Nova At a Glance Card")
 
+This Nova card displays a count for all of your resources.
+
 ## Installation
 
 You can install the package in to a Laravel app that uses [Nova](https://nova.laravel.com) via composer:
@@ -30,22 +32,22 @@ public function cards()
 }
 ```
 
-To publish the config file to `config/at-a-glance.php` run:
+### Customize
 
-```bash
-php artisan vendor:publish --provider="Nickfairchild\AtAGlance\CardServiceProvider" --tag="config"
-```
-
-To add a resource to the card you need to add an option to the config file in the format `resource_slug => 'Model\Class'`
+If you do not want a specific resource to be displayed on the card you can pass through an array of the resource classes to exclude like so.
 ```php
-return [
-    'resources' => [
-        'users' => 'App\User',
-        'posts' => 'App\Post',
-    ]
-];
-
+public function cards()
+{
+    return [
+        // ...
+        (new \Nickfairchild\AtAGlance\AtAGlance)->excludeResources([Pages::class]),
+    ];
+}
 ```
+
+## Bugs / Issues / Ideas
+
+Please create an issue using the [issue tracker](https://github.com/nickfairchild/nova-at-a-glance-card/issues) or drop me an email.
 
 ## License
 
