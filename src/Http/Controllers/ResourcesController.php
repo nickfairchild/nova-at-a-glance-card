@@ -9,7 +9,11 @@ class ResourcesController
 {
     public function __invoke(Request $request)
     {
-        $availableResources = array_diff(Nova::availableResources($request), $request->excludes);
+        if (is_array($request->excludes)) {
+            $availableResources = array_diff(Nova::availableResources($request), $request->excludes);
+        } else {
+            $availableResources = Nova::availableResources($request);
+        }
 
         $items = [];
         foreach ($availableResources as $resource) {
