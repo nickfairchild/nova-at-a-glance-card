@@ -17,7 +17,7 @@ class ResourcesController
 
         $items = [];
         foreach ($availableResources as $resource) {
-            $count = $resource::$model::all()->count();
+            $count = $resource::$model::count();
             $label = $count === 1 ? $resource::singularLabel() : $resource::label();
             $items[$resource] = [
                 'count' => $count,
