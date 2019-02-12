@@ -1,5 +1,5 @@
 <template>
-    <card class="flex flex-col">
+    <card class="flex flex-col h-auto">
         <div class="px-3 py-3">
             <h1 class="text-2xl text-80 font-light">At A Glance</h1>
         </div>
