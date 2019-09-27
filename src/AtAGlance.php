@@ -17,7 +17,7 @@ class AtAGlance extends Card
      * Exclude Resources from the card
      *
      * @param array $resources
-     * @return void
+     * @return $this
      */
     public function excludeResources(array $resources)
     {
